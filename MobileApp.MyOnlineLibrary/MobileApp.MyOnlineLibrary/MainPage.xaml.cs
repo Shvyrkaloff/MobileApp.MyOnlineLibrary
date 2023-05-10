@@ -118,26 +118,36 @@ namespace MobileApp.MyOnlineLibrary
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            if (P)
-            switch (Pick.SelectedIndex)
+            
+            foreach (var user in Users)
             {
-                case 0:
+                if (user.Password == Pas.Text && user.Login == Log.Text)
                 {
-                    var page = new Menu();
-                    await Navigation.PushAsync(page);
-                    break;
+                    switch (Pick.SelectedIndex)
+                    {
+                        case 0:
+                        {
+                            var page = new Menu();
+                            await Navigation.PushAsync(page);
+                            break;
+                        }
+                        case 1:
+                        {
+                            var page = new BookMenu();
+                            await Navigation.PushAsync(page);
+                            break;
+                        }
+                        case 2:
+                        {
+                            var page = new UserMenu();
+                            await Navigation.PushAsync(page);
+                            break;
+                        }
+                    }
                 }
-                case 1:
+                else
                 {
-                    var page = new BookMenu();
-                    await Navigation.PushAsync(page);
-                    break;
-                }
-                case 2:
-                {
-                    var page = new UserMenu();
-                    await Navigation.PushAsync(page);
-                    break;
+                    DisplayAlert("Error", "Login error", "Ok");
                 }
             }
         }
